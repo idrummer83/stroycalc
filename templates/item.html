@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>item</title>
+</head>
+<body>
+
+
+<h2>categories</h2>
+<p>please, choose category id</p>
+<table border="1">
+    <tr>
+        <td>category_id</td>
+        <td>category</td>
+        <td>category_item</td>
+
+    </tr>
+    {% for c in all_cat %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.name_category }}</td>
+            <td>
+                {% if c.id %}
+                    {% for i in all_item %}
+                        {% if c.id == i.cat_id%}
+                            {{ i.name_item }}<br>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </td>
+
+        </tr>
+     {% endfor %}
+</table>
+
+
+<form action="{{ url_for('create_item') }}" method="post">
+        <p>
+            <input type="text" name="cat_id" value="{{cat_id}}" placeholder="category_id">
+        </p>
+        <p>
+            <input type="text" name="item" value="{{item}}" placeholder="item">
+            <input type="text" name="price" value="{{price}}" placeholder="price">
+        </p>
+        <p>
+            <input type="submit" value="save">
+        </p>
+    </form>
+
+
+<a href="{{ url_for('calc_page') }}">go calc</a>
+
+</body>
+</html>

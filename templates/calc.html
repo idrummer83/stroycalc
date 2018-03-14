@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calc</title>
+</head>
+<body>
+
+<h1>calc</h1>
+
+<a href="{{ url_for('welcome') }}">main page</a>
+<br>
+
+<form action="{{ url_for('calc_page') }}"  method="post">
+  <div class="">
+      {% for c in all_cat %}
+        <h4>{{ c.name_category }}</h4>
+                {% if c.id %}
+                    {% for i in all_item %}
+                        {% if c.id == i.cat_id %}
+                            <span>{{ i.name_item }}</span>
+                            <span>{{ i.price_item }}</span>
+                            <input type="checkbox" name="price" value="{{ i.price_item }}">
+                            <!--<input type="checkbox" name="price" value="{{ i.price_item }}_{{c.id}}">-->
+                            <br>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+     {% endfor %}
+  </div>
+    <br>
+  <button type="submit">Calc</button>
+</form>
+
+<p>full summ -- <strong>{{ n }}</strong></p>
+
+</body>
+</html>

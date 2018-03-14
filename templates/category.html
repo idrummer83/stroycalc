@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>category</title>
+</head>
+<body>
+
+<h2>category</h2>
+
+    <form action="{{ url_for('create_category') }}" method="post">
+        <p>
+            <input type="text" name="cat" value="{{cat}}" placeholder="category">
+        </p>
+        <p>
+            <input type="submit" value="save">
+        </p>
+    </form>
+<br>
+
+<h2>categories</h2>
+ {% for c in all_cat %}
+    {{ c.name_category }} <br>
+ {% endfor %}
+
+<br>
+<a href="{{ url_for('create_item') }}">create item</a>
+
+</body>
+</html>
