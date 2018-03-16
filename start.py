@@ -60,21 +60,22 @@ def create_item():
 def calc_page():
     all_cat = Category.query.all()
     all_item = Item.query.all()
-    n = 0
+    n = k = 0
+    l=p=[]
     if request.method == 'POST':
         all = request.form.getlist('price')
         # l.append(all.split('_'))
-        for a in all:
-            n += int(a)
+        # for a in all:
+        #     n += int(a)
 
-        # for i in l:
-        #     if id == int(l[0][1]):
-        #         id = i[1]
-        #         n= n + int(i[0])
-        #         li=[id, n]
-        #     else:
-        #         newl.append(li)
-        return render_template('calc.html', all_cat = all_cat, all_item = all_item, n = n)
+        for a in all:l.append(a.split('_'))
+        first = l.pop(0)
+        for i in l:
+            n = l[0][1]
+            if int(first[1]) == int(n):
+                k = int(first[0]) + int(l[0][0])
+                p.append([k,int(first[1])])
+        return render_template('calc.html', all_cat = all_cat, all_item = all_item, n = n, l=p, k=k)
 
     return render_template('calc.html', all_cat = all_cat, all_item = all_item)
 
