@@ -21,7 +21,7 @@
                             <span>{{ i.name_item }}</span>
                             <span>{{ i.price_item }}</span>
                             <!--<input type="checkbox" name="price" value="{{ i.price_item }}">-->
-                            <input type="checkbox" name="price" value="{{ i.price_item }}_{{c.id}}">
+                            <input type="checkbox" name="price" value="{{ i.price_item }}_id-{{c.id}}">
                             <br>
                         {% endif %}
                     {% endfor %}
@@ -34,9 +34,12 @@
 
 <p>full summ -- <strong>{{ n }}</strong></p>
 
-{{l}}
-
-{{k}}
+{% for a in n %}
+    {% for key, value in a.items() %}
+          <h1>Key: {{key}}</h1>
+          <h2>Value: {{value}}</h2>
+       {% endfor %}<br>
+{% endfor %}
 
 </body>
 </html>
