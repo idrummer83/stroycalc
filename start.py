@@ -82,9 +82,14 @@ def calc_page():
                 u = a[1]
             del l[:i[1]:]
             w.append([u, k])
-        dct = dict((k[0], k[1]) for k in w)
+        dct = [dict((k[0], k[1]) for k in w)]
 
-        return render_template('calc.html', all_cat = all_cat, all_item = all_item, n = dct)
+        fp = []
+        f=0
+        for fp in w:
+            f += fp[1]
+
+        return render_template('calc.html', all_cat = all_cat, all_item = all_item, dct=dct, full = f)
 
     return render_template('calc.html', all_cat = all_cat, all_item = all_item)
 

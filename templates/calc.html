@@ -25,6 +25,13 @@
                             <br>
                         {% endif %}
                     {% endfor %}
+                    {% for n in dct %}
+                        {% for key, value in n.items() %}
+                            {% if key[3::]|int == c.id %}
+                                <h4>selected price is - <u>{{ value }}</u></h4>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
                 {% endif %}
      {% endfor %}
   </div>
@@ -32,14 +39,7 @@
   <button type="submit">Calc</button>
 </form>
 
-<p>full summ -- <strong>{{ n }}</strong></p>
-
-{% for a in n %}
-    {% for key, value in a.items() %}
-          <h1>Key: {{key}}</h1>
-          <h2>Value: {{value}}</h2>
-       {% endfor %}<br>
-{% endfor %}
+<p>full summ -- <strong>{{ full }}</strong></p>
 
 </body>
 </html>
