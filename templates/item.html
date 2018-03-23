@@ -23,8 +23,8 @@
             <td>
                 {% if c.id %}
                     {% for i in all_item %}
-                        {% if c.id == i.cat_id%}
-                            {{ i.name_item }}<br>
+                        {% if c.id == i.category_id%}
+                            {{ i.name_item }} -- {{i.price_item}}<br>
                         {% endif %}
                     {% endfor %}
                 {% endif %}

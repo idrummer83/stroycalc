@@ -17,10 +17,9 @@
         <h4>{{ c.name_category }}</h4>
                 {% if c.id %}
                     {% for i in all_item %}
-                        {% if c.id == i.cat_id %}
+                        {% if c.id == i.category_id %}
                             <span>{{ i.name_item }}</span>
                             <span>{{ i.price_item }}</span>
-                            <!--<input type="checkbox" name="price" value="{{ i.price_item }}">-->
                             <input type="checkbox" name="price" value="{{ i.price_item }}_id-{{c.id}}">
                             <br>
                         {% endif %}

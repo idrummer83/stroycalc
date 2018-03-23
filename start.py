@@ -1,15 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, g
 from flask_sqlalchemy import SQLAlchemy
-import sqlite3
-# from sqlalchemy.orm import relationship
 
 app = Flask('__name__')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://calc:calc@localhost/calc'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/database.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://calc:calc@localhost/calc'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+
 db = SQLAlchemy(app)
 
 from collections import Counter
 from itertools import chain
+from sqlalchemy.engine import Engine
+from sqlalchemy import event
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 from models.models import *
 
@@ -35,11 +42,11 @@ def create_category():
 def create_item():
     cat_id = item = price = ''
     if request.method == 'POST':
-        cat = request.form.get('cat_id', '')
+        cat_id = request.form.get('cat_id', '')
         item = request.form.get('item', '')
         price = request.form.get('price', '')
-        if cat and item and price:
-            category_item = Item(name_item=item,price_item=price,cat_id=cat)
+        if item and price:
+            category_item = Item(name_item=item,price_item=price,category_id=cat_id)
             db.session.add(category_item)
             db.session.commit()
         return redirect('/item')
