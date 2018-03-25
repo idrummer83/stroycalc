@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>item</title>
-</head>
-<body>
+{% extends "index.html" %}
 
+
+{% block content %}
 
 <h2>categories</h2>
 <p>please, choose category id</p>
@@ -34,22 +30,27 @@
      {% endfor %}
 </table>
 
+<div style="height:20px;"></div>
 
 <form action="{{ url_for('create_item') }}" method="post">
-        <p>
-            <input type="text" name="cat_id" value="{{cat_id}}" placeholder="category_id">
-        </p>
-        <p>
-            <input type="text" name="item" value="{{item}}" placeholder="item">
-            <input type="text" name="price" value="{{price}}" placeholder="price">
-        </p>
-        <p>
-            <input type="submit" value="save">
-        </p>
-    </form>
+    <div>
+        <span>Select category</span>
+        <select name="id_select">
+            {% for c in all_cat %}
+                <option  value="{{ c.id }}">{{ c.name_category }} - {{ c.id }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <p>
+        <input type="text" name="item" value="{{item}}" placeholder="item">
+        <input type="text" name="price" value="{{price}}" placeholder="price">
+    </p>
+    <p>
+        <input type="submit" value="save">
+    </p>
+</form>
 
 
 <a href="{{ url_for('calc_page') }}">go calc</a>
 
-</body>
-</html>
+{% endblock %}

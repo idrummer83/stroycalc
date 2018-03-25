@@ -13,7 +13,7 @@ from models.models import *
 
 @app.route('/')
 def welcome():
-    return render_template('index.html')
+    return render_template('menu.html')
 
 
 @app.route('/category', methods=['GET', 'POST'])
@@ -33,7 +33,7 @@ def create_category():
 def create_item():
     cat_id = item = price = ''
     if request.method == 'POST':
-        cat_id = request.form.get('cat_id', '')
+        cat_id = request.form.get('id_select', '')
         item = request.form.get('item', '')
         price = request.form.get('price', '')
         if item and price:
